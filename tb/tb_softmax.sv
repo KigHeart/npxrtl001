@@ -5,6 +5,7 @@ module tb_softmax;
   always #5 clk = ~clk;
   logic in_valid = 0; logic [N*16-1:0] s_flat; logic out_valid; logic [N*16-1:0] p_flat;
   softmax_q15 #(.N(N)) dut(.*);
+  logic [N*16-1:0] tmp;
   string dir; integer fd, n, errs, rc; integer sv [N]; integer pv [N];
   initial begin
     if (!$value$plusargs("vec=%s", dir)) dir = "sim/vec";
@@ -17,7 +18,10 @@ module tb_softmax;
       for (int i = 0; i < N; i++) rc += $fscanf(fd, "%d", sv[i]);
       for (int i = 0; i < N; i++) rc += $fscanf(fd, "%d", pv[i]);
       if (rc == 2*N) begin
-        for (int i = 0; i < N; i++) s_flat[16*i +: 16] = 16'(sv[i]);
+        // Build the vector in a temporary and assign it whole: Verilator 5.020 (Ubuntu 24.04 apt) does not wake
+        // combinational logic when a timed process writes a signal slice by slice.
+        tmp = '0; for (int i = 0; i < N; i++) tmp[16*i +: 16] = 16'(sv[i]);
+        s_flat = tmp;
         in_valid = 1; @(negedge clk); in_valid = 0;
         if (!out_valid) begin errs++; $display("test %0d: out_valid low", n); end
         for (int i = 0; i < N; i++) begin

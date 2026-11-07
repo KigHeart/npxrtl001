@@ -6,6 +6,7 @@ module tb_cim;
   logic w_we = 0; logic [3:0] w_row; logic [2:0] w_col; logic signed [7:0] w_data;
   logic start = 0; logic [ROWS*8-1:0] x_flat; logic busy, done; logic [COLS*32-1:0] y_flat;
   cim_tile #(.ROWS(ROWS), .COLS(COLS)) dut(.*);
+  logic [ROWS*8-1:0] xtmp;
   string dir; integer fd, n, errs, v, rc, r, c;
   integer wv [ROWS*COLS]; integer xv [ROWS]; integer yv [COLS];
   initial begin
@@ -24,7 +25,8 @@ module tb_cim;
           w_we = 1; w_row = r[3:0]; w_col = c[2:0]; w_data = 8'(wv[r*COLS + c]); @(negedge clk);
         end
         w_we = 0;
-        for (int i = 0; i < ROWS; i++) x_flat[8*i +: 8] = 8'(xv[i]);
+        xtmp = '0; for (int i = 0; i < ROWS; i++) xtmp[8*i +: 8] = 8'(xv[i]);
+        x_flat = xtmp;   // whole-vector assign (see tb_softmax.sv note on Verilator 5.020)
         start = 1; @(negedge clk); start = 0;
         v = 0;
         while (!done && v < 30) begin @(negedge clk); v++; end
