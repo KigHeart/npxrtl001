@@ -1,0 +1,63 @@
+{
+ "revA": {
+  "CiM + digital matrix": 210,
+  "Photonic": 90,
+  "KV + local memory": 130,
+  "Digital precision/nonlinear": 55,
+  "Interconnect/IO/clock": 55,
+  "Control/telemetry/margin": 60
+ },
+ "revB": {
+  "CiM + digital matrix": 150,
+  "Photonic (optional prefill tile)": 30,
+  "KV + local memory (HBM4-class)": 280,
+  "Digital precision/nonlinear": 45,
+  "Interconnect/IO/clock": 55,
+  "Control/telemetry/margin": 40
+ },
+ "bf16_tflops": 153.60000000000002,
+ "int8_tflops": 600.0000000000001,
+ "arith_ceiling_tok_s": 1097.1428571428573,
+ "weight_pass_ms": 35.0,
+ "ridge_batch": 38.400000000000006,
+ "batch_for_1000tok_s": 35.0,
+ "mem_power_sens_w": {
+  "3.0": 230.39999999999998,
+  "3.5": 268.8,
+  "4.5": 345.59999999999997
+ },
+ "kv_rows": [
+  {
+   "S": 8000,
+   "kv_gb": 2.62144,
+   "bf16": 2288.818359375,
+   "int8": 4577.63671875,
+   "int4": 9155.2734375,
+   "bf16_revA": 381.4697265625
+  },
+  {
+   "S": 32000,
+   "kv_gb": 10.48576,
+   "bf16": 572.20458984375,
+   "int8": 1144.4091796875,
+   "int4": 2288.818359375,
+   "bf16_revA": 95.367431640625
+  },
+  {
+   "S": 100000,
+   "kv_gb": 32.768,
+   "bf16": 183.10546875,
+   "int8": 366.2109375,
+   "int4": 732.421875,
+   "bf16_revA": 30.517578125
+  },
+  {
+   "S": 1000000,
+   "kv_gb": 327.68,
+   "bf16": 18.310546875,
+   "int8": 36.62109375,
+   "int4": 73.2421875,
+   "bf16_revA": 3.0517578125
+  }
+ ]
+}

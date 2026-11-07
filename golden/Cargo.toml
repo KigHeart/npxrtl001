@@ -1,0 +1,12 @@
+[package]
+name = "npx-golden"
+version = "0.1.0"
+edition = "2021"
+description = "Bit-exact golden models for the Nelix PhotonicX Core RTL (TR-TEG-2026-NPX-001)"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "gen_vectors"
+path = "src/bin/gen_vectors.rs"

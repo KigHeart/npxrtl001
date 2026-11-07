@@ -1,0 +1,4 @@
+golden/target/
+sim/obj_*/
+*.vcd
+*.fst
