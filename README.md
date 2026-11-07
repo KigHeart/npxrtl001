@@ -1,3 +1,5 @@
+![sim](https://github.com/KigHeart/npxrtl001/actions/workflows/sim.yml/badge.svg)
+
 # NPX-001 Scope A RTL (rev B)
 
 Nelix PhotonicX Core, Tilil Systems Group, TR-TEG-2026-NPX-001. Status: architecture-baseline RTL for review.
